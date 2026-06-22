@@ -1,8 +1,11 @@
-import { supabase } from "../lib/supabase";
+"use server";
+import { createClient } from "../utils/supabase/server";
 
 export async function signin(prevState: unknown, formData: FormData) {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
+
+    const supabase = await createClient();
 
     if (!email || !password) {
         return { error: "Email dan password wajib diisi." };

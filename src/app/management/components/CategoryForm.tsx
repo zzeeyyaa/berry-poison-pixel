@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { supabase } from "@/src/lib/supabase";
+import { createClient } from "@/src/utils/supabase/client";
 import { DBCategory } from "../types";
 
 export interface CategoryFormProps {
@@ -17,6 +17,7 @@ export default function CategoryForm({
   editingCategory,
   onClose,
 }: CategoryFormProps) {
+  const supabase = createClient();
   const [catName, setCatName] = useState<string>("");
   const [catSlug, setCatSlug] = useState<string>("");
   const [catIcon, setCatIcon] = useState<string>("");
@@ -145,6 +146,11 @@ export default function CategoryForm({
               <option value="capsule">Capsule</option>
               <option value="softgel">Softgel</option>
               <option value="jar">Jar</option>
+              <option value="makeup">Makeup</option>
+              <option value="lipcare">Lipcare</option>
+              <option value="buku">Buku</option>
+              <option value="skincare">Skincare</option>
+              <option value="bodycare">Bodycare</option>
             </select>
           </div>
         </div>

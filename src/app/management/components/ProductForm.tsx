@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { supabase } from "@/src/lib/supabase";
+import { createClient } from "@/src/utils/supabase/client";
 import { DBCategory, DBProduct } from "../types";
+import { compressImage } from "@/src/utils/imageCompression";
+import ImageCropperModal from "./ImageCropperModal";
 
 export interface ProductFormProps {
   dbCategories: DBCategory[];
@@ -19,6 +21,7 @@ export default function ProductForm({
   editingProduct,
   onClose,
 }: ProductFormProps) {
+  const supabase = createClient();
   const [name, setName] = useState<string>("");
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | "">("");
   const [price, setPrice] = useState<number>(0);
@@ -30,6 +33,7 @@ export default function ProductForm({
   const [statBoost, setStatBoost] = useState<string>("");
   const [statBoostLevel, setStatBoostLevel] = useState<number>(1);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageToCropSrc, setImageToCropSrc] = useState<string | null>(null);
   const [uploadingImage, setUploadingImage] = useState<boolean>(false);
 
   useEffect(() => {
@@ -44,6 +48,7 @@ export default function ProductForm({
       setStatBoost(editingProduct.statBoost || "");
       setStatBoostLevel(editingProduct.statBoostLevel || 1);
       setImageFile(null);
+      setImageToCropSrc(null);
     } else {
       clearForm();
     }
@@ -70,6 +75,7 @@ export default function ProductForm({
     setStatBoost("");
     setStatBoostLevel(1);
     setImageFile(null);
+    setImageToCropSrc(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -87,12 +93,13 @@ export default function ProductForm({
     try {
       if (imageFile) {
         setUploadingImage(true);
-        const fileExt = imageFile.name.split('.').pop();
+        const compressedFile = await compressImage(imageFile);
+        const fileExt = compressedFile.name.split('.').pop() || 'jpg';
         const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
         
         const { error: uploadError } = await supabase.storage
           .from('image_url')
-          .upload(fileName, imageFile);
+          .upload(fileName, compressedFile);
 
         setUploadingImage(false);
 
@@ -105,6 +112,19 @@ export default function ProductForm({
           .getPublicUrl(fileName);
         
         uploadedImageUrl = publicUrl;
+
+        // Hapus gambar lama dari storage jika ada
+        if (editingProduct?.image_url) {
+          try {
+            const oldUrlParts = editingProduct.image_url.split('/public/image_url/');
+            if (oldUrlParts.length > 1) {
+              const oldFileName = oldUrlParts[1];
+              await supabase.storage.from('image_url').remove([oldFileName]);
+            }
+          } catch (deleteErr) {
+            console.error("Gagal menghapus gambar lama:", deleteErr);
+          }
+        }
       }
 
       const payload = {
@@ -234,13 +254,23 @@ export default function ProductForm({
                 {editingProduct?.image_url && !imageFile && (
                   <img src={editingProduct.image_url} alt="Current" className="h-8 w-8 object-cover rounded shadow-sm border border-[#4E3C44]/20" />
                 )}
+                {imageFile && (
+                  <img src={URL.createObjectURL(imageFile)} alt="New Preview" className="h-8 w-8 object-cover rounded shadow-sm border border-[#4E3C44]/20" />
+                )}
                 <label className="cursor-pointer px-3 py-1.5 bg-[#4E3C44] border border-[#2B2125] text-[#F3E2DC] hover:bg-[#D9455B] hover:border-[#9C3040] hover:text-[#FFFDFD] transition-colors rounded-lg text-[10px] font-black shrink-0 shadow-[0_2px_0_#2B2125] hover:shadow-none hover:translate-y-[2px]">
                   {imageFile ? 'Ganti File' : 'Upload File'}
                   <input
                     id="image-upload-input"
                     type="file"
                     accept="image/*"
-                    onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const url = URL.createObjectURL(file);
+                        setImageToCropSrc(url);
+                      }
+                      e.target.value = '';
+                    }}
                     className="hidden"
                   />
                 </label>
@@ -341,6 +371,22 @@ export default function ProductForm({
           </button>
         </div>
       </form>
+      
+      {/* Crop Modal */}
+      {imageToCropSrc && (
+        <ImageCropperModal
+          imageSrc={imageToCropSrc}
+          onClose={() => {
+            setImageToCropSrc(null);
+            URL.revokeObjectURL(imageToCropSrc);
+          }}
+          onCropComplete={(croppedFile) => {
+            setImageFile(croppedFile);
+            setImageToCropSrc(null);
+            URL.revokeObjectURL(imageToCropSrc);
+          }}
+        />
+      )}
     </div>
   );
 }

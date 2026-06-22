@@ -1,14 +1,18 @@
-import { supabase } from "../lib/supabase";
+"use server";
+import { createClient } from "../utils/supabase/server";
 
 export async function getAllProducts() {
+    const supabase = await createClient();
     return await supabase.from("products").select("*");
 }
 
 export async function getProductsByCategory(category_id: number) {
+    const supabase = await createClient();
     return await supabase.from("products").select("*").eq("category_id", category_id);
 }
 
 export async function createProduct(formData: FormData) {
+    const supabase = await createClient();
     const product = {
         name: formData.get("name") as string,
         price: formData.get("price") as string,
@@ -28,6 +32,7 @@ export async function createProduct(formData: FormData) {
 }
 
 export async function deleteProduct(id: string) {
+    const supabase = await createClient();
     const result = await supabase.from("products").delete().eq("id", id);
     if (!result.error) {
         return { success: true, data: result.data };
@@ -37,10 +42,12 @@ export async function deleteProduct(id: string) {
 }
 
 export async function getProductById(id: string) {
+    const supabase = await createClient();
     return await supabase.from("products").select("*").eq("id", id);
 }
 
 export async function updateProduct(id: string, formData: FormData) {
+    const supabase = await createClient();
     const product = {
         name: formData.get("name") as string,
         price: formData.get("price") as string,
@@ -54,6 +61,7 @@ export async function updateProduct(id: string, formData: FormData) {
 }
 
 export async function createCategory(formData: FormData) {
+    const supabase = await createClient();
     const category = {
         name: formData.get("name") as string,
         slug: formData.get("slug") as string,
@@ -69,6 +77,7 @@ export async function createCategory(formData: FormData) {
 }
 
 export async function updateCategory(id: number, formData: FormData) {
+    const supabase = await createClient();
     const category = {
         name: formData.get("name") as string,
         slug: formData.get("slug") as string,
@@ -78,5 +87,6 @@ export async function updateCategory(id: number, formData: FormData) {
 }
 
 export async function deleteCategory(id: number) {
+    const supabase = await createClient();
     return await supabase.from("categories").delete().eq("id", id);
 }

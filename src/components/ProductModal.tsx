@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { Product } from "@/src/types/product";
-import { ItemIcon } from "./ItemCard";
+import { ItemIcon } from "../utils/pixelArt/GenerateIconPixel";
 
 interface ProductModalProps {
   product: Product;
@@ -86,21 +86,34 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
         </div>
 
         {/* Pricing & Footer Actions */}
-        <div className="mt-4 pt-3 border-t border-[#4E3C44]/8 flex items-center justify-between">
-          <div className="flex flex-col select-none">
+        <div className="mt-4 pt-3 border-t border-[#4E3C44]/8 flex items-center justify-between gap-2">
+          <div className="flex flex-col select-none truncate pr-2">
             <span className="font-sans text-base font-extrabold text-[#D9455B] leading-none">
               {formatIDR(product.price)}
             </span>
           </div>
 
-          <a
-            href={product.shopeeLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="modern-btn modern-btn-cherry tracking-wide uppercase px-5 py-2 font-bold cursor-pointer text-center inline-block"
-          >
-            BELI DI SHOPEE
-          </a>
+          <div className="flex items-center gap-1.5 shrink-0">
+            {product.videoLink && (
+              <a
+                href={product.videoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="modern-btn bg-[#4E3C44] text-[#F3E2DC] border border-[#F3E2DC]/10 shadow-sm hover:bg-[#5E4C54] hover:text-white hover:border-white/20 tracking-wide uppercase px-3 py-2 font-bold cursor-pointer text-center flex items-center justify-center transition-all"
+                title="Tonton Video"
+              >
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+              </a>
+            )}
+            <a
+              href={product.shopeeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="modern-btn modern-btn-cherry tracking-wide uppercase px-5 py-2 font-bold cursor-pointer text-center inline-block"
+            >
+              BELI DI SHOPEE
+            </a>
+          </div>
         </div>
       </div>
     </div>

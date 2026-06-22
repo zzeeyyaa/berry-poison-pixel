@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/src/lib/supabase";
+import { createClient } from "@/src/utils/supabase/server";
 import { productsData } from "@/data/productsData";
 
 export async function GET() {
+  const supabase = await createClient();
   try {
     // 1. Extract unique categories from productsData
     const uniqueCategories = Array.from(new Set(productsData.map(p => p.category)));

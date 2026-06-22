@@ -5,10 +5,12 @@ import { Product } from "@/src/types/product";
 import ItemCard from "../components/ItemCard";
 import AvatarStats from "../components/AvatarStats";
 import ProductModal from "../components/ProductModal";
-import { supabase } from "../lib/supabase";
+import { createClient } from "@/src/utils/supabase/client";
 import { AuthButton } from "../components/authButton";
+import WelcomeDialog from "../components/WelcomeDialog";
 
 export default function Home() {
+  const supabase = createClient();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>(["All Items"]);
   const [selectedCategory, setSelectedCategory] = useState<string>("All Items");
@@ -142,6 +144,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen pb-16 flex flex-col font-sans select-none overflow-x-hidden">
+      <WelcomeDialog />
       {/* Main Container */}
       <main className="flex-1 w-full max-w-6xl mx-auto px-4 py-6 md:py-8 flex flex-col gap-6 md:gap-8 z-10">
 

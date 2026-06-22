@@ -1,6 +1,6 @@
 import React from "react";
 import { DBProduct } from "../types";
-import { ItemIcon } from "@/src/components/ItemCard";
+import { ItemIcon } from "@/src/utils/pixelArt/GenerateIconPixel";
 
 export interface ProductTableProps {
   products: DBProduct[];

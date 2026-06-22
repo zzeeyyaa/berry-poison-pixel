@@ -1,6 +1,6 @@
 import React from "react";
 import { DBCategory } from "../types";
-import { ItemIcon } from "@/src/components/ItemCard";
+import { ItemIcon } from "@/src/utils/pixelArt/GenerateIconPixel";
 
 export interface CategoryTableProps {
   categories: DBCategory[];
@@ -60,9 +60,14 @@ export default function CategoryTable({
                     /{cat.slug}
                   </td>
                   <td className="py-3 px-3 sm:py-4 sm:px-4">
-                    <span className="px-2 py-1 sm:px-2.5 sm:py-1 bg-[#F3E2DC]/50 text-[#4E3C44] rounded-md font-black text-[8px] sm:text-[9px] uppercase tracking-wide border border-[#4E3C44]/10">
-                      {cat.icon || "default"}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 flex items-center justify-center bg-[#FFFDFD] rounded-lg border border-[#4E3C44]/10 shrink-0 shadow-sm">
+                        <ItemIcon type={cat.icon || "default"} className="w-5 h-5" />
+                      </div>
+                      <span className="px-2 py-1 sm:px-2.5 sm:py-1 bg-[#F3E2DC]/50 text-[#4E3C44] rounded-md font-black text-[8px] sm:text-[9px] uppercase tracking-wide border border-[#4E3C44]/10">
+                        {cat.icon || "default"}
+                      </span>
+                    </div>
                   </td>
                   <td className="py-3 px-3 sm:py-4 sm:px-6 text-right flex gap-1 sm:gap-2 justify-end opacity-100 sm:opacity-80 group-hover:opacity-100 transition-opacity">
                     <button

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { supabase } from "@/src/lib/supabase";
+import { createClient } from "@/src/utils/supabase/client";
 import Link from "next/link";
 import { toast } from "sonner";
 import { DBCategory, DBProduct } from "./types";
@@ -13,6 +13,7 @@ import CategoryForm from "./components/CategoryForm";
 import CategoryTable from "./components/CategoryTable";
 
 export default function ManagementPage() {
+  const supabase = createClient();
   const [activeTab, setActiveTab] = useState<"products" | "categories">("products");
   const [products, setProducts] = useState<DBProduct[]>([]);
   const [paginatedCategories, setPaginatedCategories] = useState<DBCategory[]>([]);

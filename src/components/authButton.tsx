@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../lib/supabase";
+import { createClient } from "@/src/utils/supabase/client";
 import { Button } from "./ui/Button";
 import { ConfirmDialog } from "./ui/ConfirmDialog";
 import { toast } from "sonner";
 
 export function AuthButton() {
+  const supabase = createClient();
   const [user, setUser] = useState<any>(null);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
