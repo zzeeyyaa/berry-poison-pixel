@@ -1,9 +1,9 @@
 <div align="center">
   <img src="./public/strawberry.svg" alt="Poison Pixel Logo" width="120" />
-  <h1>🍓 Poison Pixel Hub</h1>
-  <p><em>Curated Cozy Shopee Deals & RPG-Themed Affiliate Storefront</em></p>
+  <h1>🍓 Berry Poison Pixel</h1>
+  <p><em>Personal Curated Collection & RPG-Themed Inventory</em></p>
 
-  [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js&logoColor=white)](https://nextjs.org/)
+  [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white)](https://nextjs.org/)
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
   [![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -13,17 +13,17 @@
 
 ## 🎮 Tentang Proyek Ini
 
-**Poison Pixel** adalah *web application* bergaya *pixel-art* dan *vintage-cozy* yang dirancang sebagai etalase toko afiliasi (Shopee Affiliate). Dengan antarmuka yang terinspirasi dari permainan RPG retro (menggunakan avatar "NPC Shopkeeper"), web ini menawarkan pengalaman berbelanja dan rekomendasi barang yang unik dan menarik secara visual dengan balutan palet warna *Rosy Espresso*.
+**Berry Poison Pixel** adalah *web application* bergaya *pixel-art* dan *vintage-cozy* yang dirancang sebagai etalase koleksi barang pribadi (*Personal Inventory / Wishlist Hub*). Dengan antarmuka yang terinspirasi dari permainan RPG retro (menggunakan avatar "NPC Shopkeeper"), web ini menawarkan pengalaman melihat-lihat koleksi yang unik dan menarik secara visual dengan balutan palet warna *Rosy Espresso*.
 
-Selain berfungsi sebagai etalase (*Storefront*), Poison Pixel juga dilengkapi dengan sistem **Manajemen (Dashboard) Internal** untuk mengelola inventaris produk dan kategori secara *real-time* langsung terhubung dengan *database* Supabase.
+Selain berfungsi sebagai etalase (*Storefront*), Berry Poison Pixel juga dilengkapi dengan sistem **Manajemen (Dashboard) Internal** untuk mengelola inventaris produk dan kategori secara *real-time* langsung terhubung dengan *database* Supabase.
 
 ## ✨ Fitur Utama
 
-- **🏪 RPG-Themed Storefront:** Tampilan *grid* katalog produk yang estetik lengkap dengan teks dialog khas NPC dan indikator *stat boost* (Status) layaknya di dalam *game* RPG.
-- **⚡ Server-Side Pagination & Filtering:** Pemrosesan beban berat (Pencarian Produk, Filter Kategori, *Load More*) dilakukan sepenuhnya di sisi *backend* (Supabase). Memastikan kecepatan memuat *(loading)* tetap *ngebut* bahkan untuk ribuan barang.
-- **🔒 Secure Management Dashboard:** Panel admin terproteksi fitur *Authentication* untuk manajemen CRUD (*Create, Read, Update, Delete*) Produk dan Kategori dengan mulus.
-- **📱 Fully Responsive:** Tata letak yang disesuaikan secara dinamis agar terlihat sempurna, rapi, dan padat di layar *desktop*, *tablet*, maupun *mobile*.
-- **🔔 Interactive Notifications:** Peringatan dan sistem notifikasi tindakan *(Toast & Dialogs)* menggunakan komponen UI *custom* yang selaras dengan tema visual yang ceria.
+- **🏪 Tema Mini-RPG:** Tampilan *grid* katalog koleksi dengan sentuhan elemen ala *game* RPG retro (dialog bergaya NPC dan status barang).
+- **⚡ Pencarian & Filter Otomatis:** Fitur pencarian simpel dan saringan kategori untuk memudahkan menemukan barang dalam koleksi (menggunakan pemuatan bertahap/pagination dari Supabase).
+- **🔒 Dashboard Pribadi:** Halaman admin sederhana dengan fitur *login* untuk menambah, mengubah, atau menghapus *item* koleksi kapan saja.
+- **📱 Ramah Layar Mobile:** Tampilan yang menyesuaikan otomatis dan nyaman diakses lewat layar HP maupun laptop.
+- **🔔 Notifikasi Imut:** Animasi pop-up konfirmasi yang senada dengan desain web agar interaksinya terasa hidup.
 
 ## 🛠️ Teknologi yang Digunakan
 
@@ -63,11 +63,11 @@ Selain berfungsi sebagai etalase (*Storefront*), Poison Pixel juga dilengkapi de
 
 ## 🎨 Konsep Desain UI/UX
 
-Di **Poison Pixel**, kami sangat memperhatikan *psikologi antarmuka pengguna (UI/UX)*. 
+Di **Berry Poison Pixel**, kami sangat memperhatikan *psikologi antarmuka pengguna (UI/UX)*. 
 
-Palet warna khusus yang dijuluki **Rosy Espresso** memadukan warna merah stroberi ceria (`#D9455B`), gradasi gelap kopi *plum* (`#4E3C44`), dan latar belakang *off-white/cream* pastel (`#FDF7F5`). Kombinasi ini bertujuan untuk menghadirkan kesan antarmuka yang hangat, *cozy*, namun tetap mencolok secara interaktif. Ditambah detail *border rounded*, efek bayangan *(drop-shadow)*, serta gaya tipografi modern, ini dirancang secara khusus untuk memandu mata pengguna ke arah konversi (*click-through rate* afiliasi).
+Palet warna khusus yang dijuluki **Rosy Espresso** memadukan warna merah stroberi ceria (`#D9455B`), gradasi gelap kopi *plum* (`#4E3C44`), dan latar belakang *off-white/cream* pastel (`#FDF7F5`). Kombinasi ini bertujuan untuk menghadirkan kesan antarmuka yang hangat, *cozy*, namun tetap mencolok secara interaktif. Ditambah detail *border rounded*, efek bayangan *(drop-shadow)*, serta gaya tipografi modern, ini dirancang secara khusus agar siapapun yang melihat koleksi ini merasa betah berlama-lama.
 
 ---
 <div align="center">
-  <p>Dikembangkan oleh <strong>Zia</strong> • Dirancang untuk Konversi Estetik</p>
+  <p>Dikembangkan oleh <strong>Zia</strong> • Dirancang sebagai Etalase Estetik</p>
 </div>

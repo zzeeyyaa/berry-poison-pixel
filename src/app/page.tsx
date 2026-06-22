@@ -151,7 +151,7 @@ export default function Home() {
             {/* Tiny Pixel Strawberry Logo */}
             <img src="/strawberry.svg" alt="Strawberry Logo" className="w-6 h-6 mr-2 flex-shrink-0" style={{ imageRendering: "pixelated" }} />
             <span className="font-sans font-medium text-sm md:text-base text-[#4E3C44] tracking-wide">
-              poison<span className="font-black text-[#D9455B]">.pixel</span>
+              berry.poison<span className="font-black text-[#D9455B]">.pixel</span>
             </span>
           </div>
 
@@ -270,7 +270,7 @@ export default function Home() {
 
         {/* Footer credits */}
         <footer className="text-center text-espresso-plum/40 font-sans text-[10px] mt-10 select-none">
-          <p>© 2026 PoisonPixel Hub. All rights reserved.</p>
+          <p>© 2026 Berry Poison Pixel Hub. All rights reserved.</p>
           <p className="mt-1">Crafted with Retro Pixel Accents • Styled for Conversions</p>
         </footer>
       </main>

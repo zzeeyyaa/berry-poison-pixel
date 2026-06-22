@@ -9,8 +9,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "PoisonPixel | Cozy Modern Shopee Affiliate Hub",
-  description: "Temukan racun Shopee terbaik dengan rekomendasi terkurasi yang cozy, estetik, dan minimalis!",
+  title: "Berry Poison Pixel | Personal Curated Hub",
+  description: "Your cozy retro personal inventory & wishlist storefront.",
 };
 
 export default function RootLayout({
