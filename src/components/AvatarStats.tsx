@@ -162,7 +162,7 @@ export default function AvatarStats() {
             <span>HI! WELCOME</span>
           </div>
 
-          <p className="font-sans text-[11px] md:text-sm text-espresso-plum font-semibold leading-relaxed min-h-[3rem] md:min-h-[2.5rem]">
+          <p className="font-sans text-[11px] md:text-sm text-espresso-plum font-semibold leading-relaxed">
             {displayedText}
             <span className="animate-pulse ml-0.5 text-strawberry-cherry">|</span>
           </p>
