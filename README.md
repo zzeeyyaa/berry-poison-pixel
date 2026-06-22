@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="./public/strawberry.svg" alt="Poison Pixel Logo" width="120" />
+  <h1>🍓 Poison Pixel Hub</h1>
+  <p><em>Curated Cozy Shopee Deals & RPG-Themed Affiliate Storefront</em></p>
 
-## Getting Started
+  [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js&logoColor=white)](https://nextjs.org/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+  [![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+</div>
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🎮 Tentang Proyek Ini
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Poison Pixel** adalah *web application* bergaya *pixel-art* dan *vintage-cozy* yang dirancang sebagai etalase toko afiliasi (Shopee Affiliate). Dengan antarmuka yang terinspirasi dari permainan RPG retro (menggunakan avatar "NPC Shopkeeper"), web ini menawarkan pengalaman berbelanja dan rekomendasi barang yang unik dan menarik secara visual dengan balutan palet warna *Rosy Espresso*.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Selain berfungsi sebagai etalase (*Storefront*), Poison Pixel juga dilengkapi dengan sistem **Manajemen (Dashboard) Internal** untuk mengelola inventaris produk dan kategori secara *real-time* langsung terhubung dengan *database* Supabase.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Fitur Utama
 
-## Learn More
+- **🏪 RPG-Themed Storefront:** Tampilan *grid* katalog produk yang estetik lengkap dengan teks dialog khas NPC dan indikator *stat boost* (Status) layaknya di dalam *game* RPG.
+- **⚡ Server-Side Pagination & Filtering:** Pemrosesan beban berat (Pencarian Produk, Filter Kategori, *Load More*) dilakukan sepenuhnya di sisi *backend* (Supabase). Memastikan kecepatan memuat *(loading)* tetap *ngebut* bahkan untuk ribuan barang.
+- **🔒 Secure Management Dashboard:** Panel admin terproteksi fitur *Authentication* untuk manajemen CRUD (*Create, Read, Update, Delete*) Produk dan Kategori dengan mulus.
+- **📱 Fully Responsive:** Tata letak yang disesuaikan secara dinamis agar terlihat sempurna, rapi, dan padat di layar *desktop*, *tablet*, maupun *mobile*.
+- **🔔 Interactive Notifications:** Peringatan dan sistem notifikasi tindakan *(Toast & Dialogs)* menggunakan komponen UI *custom* yang selaras dengan tema visual yang ceria.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Teknologi yang Digunakan
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Teknologi | Fungsi dalam Aplikasi |
+| --- | --- |
+| **Next.js (App Router)** | *Framework* utama berbasis React untuk *routing* dan SSR. |
+| **Tailwind CSS** | Pembuatan desain UI, palet warna *custom*, dan *micro-animations*. |
+| **Supabase** | Bertindak sebagai PostgreSQL *Database* as a Service dan Sistem Autentikasi. |
+| **TypeScript** | Memastikan struktur data seperti relasi produk-kategori aman dari kesalahan *runtime*. |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Instalasi & Menjalankan Lokal
 
-## Deploy on Vercel
+1. **Clone repositori ini:**
+   ```bash
+   git clone https://github.com/zzeeyyaa/poison-pixel.git
+   cd poison-pixel
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Instal dependensi (disarankan menggunakan npm):**
+   ```bash
+   npm install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Atur Environment Variables:**
+   Salin *template* `.env.example` ke file `.env.local` lalu isi konfigurasi API Supabase Anda.
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+4. **Jalankan Development Server:**
+   ```bash
+   npm run dev
+   ```
+
+5. Buka [http://localhost:3000](http://localhost:3000) di browser untuk melihat etalase toko. Akses [http://localhost:3000/management](http://localhost:3000/management) untuk masuk ke panel administrasi.
+
+## 🎨 Konsep Desain UI/UX
+
+Di **Poison Pixel**, kami sangat memperhatikan *psikologi antarmuka pengguna (UI/UX)*. 
+
+Palet warna khusus yang dijuluki **Rosy Espresso** memadukan warna merah stroberi ceria (`#D9455B`), gradasi gelap kopi *plum* (`#4E3C44`), dan latar belakang *off-white/cream* pastel (`#FDF7F5`). Kombinasi ini bertujuan untuk menghadirkan kesan antarmuka yang hangat, *cozy*, namun tetap mencolok secara interaktif. Ditambah detail *border rounded*, efek bayangan *(drop-shadow)*, serta gaya tipografi modern, ini dirancang secara khusus untuk memandu mata pengguna ke arah konversi (*click-through rate* afiliasi).
+
+---
+<div align="center">
+  <p>Dikembangkan oleh <strong>Zia</strong> • Dirancang untuk Konversi Estetik</p>
+</div>
