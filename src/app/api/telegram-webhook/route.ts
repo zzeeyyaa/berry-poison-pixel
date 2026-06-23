@@ -6,6 +6,8 @@ import {
     handleCallbackQuery
 } from "@/src/utils/telegram";
 
+export const runtime = "edge";
+
 export async function POST(request: Request) {
     let chatId: number | undefined = undefined;
     try {
