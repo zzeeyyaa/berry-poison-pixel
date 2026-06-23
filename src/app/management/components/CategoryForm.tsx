@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { createClient } from "@/src/utils/supabase/client";
 import { DBCategory } from "../types";
+import { saveCategoryAction } from "@/src/actions/categories";
 
 export interface CategoryFormProps {
   onRefresh: () => void;
@@ -17,7 +17,6 @@ export default function CategoryForm({
   editingCategory,
   onClose,
 }: CategoryFormProps) {
-  const supabase = createClient();
   const [catName, setCatName] = useState<string>("");
   const [catSlug, setCatSlug] = useState<string>("");
   const [catIcon, setCatIcon] = useState<string>("");
@@ -55,27 +54,19 @@ export default function CategoryForm({
     };
 
     try {
+      await saveCategoryAction(payload, editingCategory?.id || undefined);
+
       if (editingCategory) {
-        const { error } = await supabase
-          .from("categories")
-          .update(payload)
-          .eq("id", editingCategory.id);
-
-        if (error) throw error;
         onSuccess("Kategori berhasil diperbarui!");
-        onClose();
       } else {
-        const { error } = await supabase.from("categories").insert([payload]);
-
-        if (error) throw error;
         onSuccess("Kategori baru berhasil ditambahkan!");
         clearCategoryForm();
-        onClose();
       }
+      onClose();
       onRefresh();
     } catch (err: any) {
       console.error(err);
-      onError(err.message || "Gagal menyimpan kategori ke Supabase.");
+      onError(err.message || "Gagal menyimpan kategori.");
     }
   };
 

@@ -28,7 +28,7 @@ export default function ProductTable({
   onCategoryFilterChange,
 }: ProductTableProps) {
   return (
-    <div className="bg-white border border-[#4E3C44]/8 rounded-2xl shadow-sm overflow-hidden mt-6 relative z-0">
+    <div className="bg-white border border-[#4E3C44]/8 rounded-2xl shadow-sm overflow-hidden relative z-0">
       <div className="p-3 sm:p-5 border-b border-[#4E3C44]/5 bg-[#FCF8F7] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center justify-between sm:justify-start gap-2">
           <h2 className="text-xs sm:text-sm font-extrabold text-[#4E3C44] flex items-center gap-1.5 sm:gap-2">

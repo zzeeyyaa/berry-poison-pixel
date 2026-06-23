@@ -18,7 +18,7 @@ export default function CategoryTable({
   onAdd,
 }: CategoryTableProps) {
   return (
-    <div className="bg-white border border-[#4E3C44]/8 rounded-2xl shadow-sm overflow-hidden mt-6 relative z-0">
+    <div className="bg-white border border-[#4E3C44]/8 rounded-2xl shadow-sm overflow-hidden relative z-0">
       <div className="p-3 sm:p-5 border-b border-[#4E3C44]/5 bg-[#FCF8F7] flex justify-between items-center gap-2">
         <h2 className="text-xs sm:text-sm font-extrabold text-[#4E3C44] flex items-center gap-1.5 sm:gap-2">
           <span>🏷️</span> <span className="hidden sm:inline">Daftar Kategori Supabase</span><span className="sm:hidden">Kategori</span>

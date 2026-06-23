@@ -3,6 +3,7 @@ import { createClient } from "@/src/utils/supabase/client";
 import { DBCategory, DBProduct } from "../types";
 import { compressImage } from "@/src/utils/imageCompression";
 import ImageCropperModal from "./ImageCropperModal";
+import { saveProductAction } from "@/src/actions/products";
 
 export interface ProductFormProps {
   dbCategories: DBCategory[];
@@ -140,23 +141,15 @@ export default function ProductForm({
         image_url: uploadedImageUrl,
       };
 
+      await saveProductAction(payload, editingProduct?.id || undefined);
+
       if (editingProduct) {
-        const { error } = await supabase
-          .from("products")
-          .update(payload)
-          .eq("id", editingProduct.id);
-
-        if (error) throw error;
         onSuccess("Produk berhasil diperbarui!");
-        onClose();
       } else {
-        const { error } = await supabase.from("products").insert([payload]);
-
-        if (error) throw error;
         onSuccess("Produk baru berhasil ditambahkan!");
         clearForm();
-        onClose();
       }
+      onClose();
       onRefresh();
       
       const fileInput = document.getElementById('image-upload-input') as HTMLInputElement;
