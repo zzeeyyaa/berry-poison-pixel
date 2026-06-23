@@ -59,8 +59,7 @@ export async function handleBotCommand(messageText: string, chatId: number) {
             "📝 *Panduan Menambahkan Produk:*\n\n" +
             "Kirim pesan dengan format berikut:\n" +
             "```\n" +
-            "Temukan [Nama Produk] seharga Rp[Harga]\n" +
-            "[Link Shopee/Web]\n" +
+            "[Judul / Salinan Shopee] [Link Shopee/Web]\n" +
             "kategori: [Nama Kategori]\n" +
             "review: [Ulasan/Review produk]\n" +
             "video: [Link Video Youtube, opsional]\n" +
@@ -74,8 +73,11 @@ export async function handleBotCommand(messageText: string, chatId: number) {
             "review: Desain retro cakep banget, tactile switch-nya mantap!\n" +
             "```\n\n" +
             "🛠️ *Command Lain:*\n" +
-            "• /clear - Membersihkan antrean pesan error jika bot macet.\n" +
-            "• /kategori [Nama] [Ikon] - Menambah kategori baru."
+            "• `/kategori [Nama] [Ikon]` - Menambah kategori baru\n" +
+            "• `/kategorilist` - Melihat daftar seluruh kategori\n" +
+            "• `/hapuskategori [slug]` - Menghapus kategori & produk di dalamnya\n" +
+            "• `/cari [kata kunci]` - Mencari produk & tombol hapus instan\n" +
+            "• `/clear` - Membersihkan antrean bot jika macet"
         );
         return NextResponse.json({ message: "help command processed" });
     }
