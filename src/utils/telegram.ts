@@ -302,13 +302,24 @@ export async function handleBotCommand(messageText: string, chatId: number) {
 
 // Handler untuk memproses input produk dari pesan biasa
 export async function handleProductInput(messageText: string, chatId: number) {
+    // Cek apakah pesan tampak seperti percobaan input produk (mengandung link, atau kata kunci kategori/review/Temukan)
+    const hasLink = /(https?:\/\/[^\s]+)/.test(messageText);
+    const hasCategory = /kategori:/i.test(messageText);
+    const hasReview = /(?:review|ulasan):/i.test(messageText);
+    const hasProductPrefix = /Temukan/i.test(messageText);
+
+    // Jika pesan tidak mengandung hal-hal di atas, anggap sebagai pesan kasual dan abaikan secara silent (diam)
+    if (!hasLink && !hasCategory && !hasReview && !hasProductPrefix) {
+        return NextResponse.json({ message: "Casual message ignored" });
+    }
+
     // 1. Parsing Link Shopee
     const urlRegex = /(https?:\/\/[^\s]+)/;
     const linkMatch = messageText.match(urlRegex);
     const productLink = linkMatch ? linkMatch[0] : "";
 
     if (!productLink) {
-        await sendTelegramMessage(chatId, "❌ Gagal: Pesan wajib berisi link produk yang valid.");
+        await sendTelegramMessage(chatId, "❌ *Gagal:* Pesan input produk wajib berisi link produk yang valid.");
         return NextResponse.json({ message: "Pesan wajib berisi link produk yang valid" }, { status: 400 });
     }
 
