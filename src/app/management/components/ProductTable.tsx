@@ -8,6 +8,8 @@ export interface ProductTableProps {
   onEdit: (product: DBProduct) => void;
   onDelete: (id: string) => void;
   onAdd: () => void;
+  searchQuery: string;
+  onSearchChange: (val: string) => void;
 }
 
 export default function ProductTable({
@@ -16,19 +18,54 @@ export default function ProductTable({
   onEdit,
   onDelete,
   onAdd,
+  searchQuery,
+  onSearchChange,
 }: ProductTableProps) {
   return (
     <div className="bg-white border border-[#4E3C44]/8 rounded-2xl shadow-sm overflow-hidden mt-6 relative z-0">
-      <div className="p-3 sm:p-5 border-b border-[#4E3C44]/5 bg-[#FCF8F7] flex justify-between items-center gap-2">
-        <h2 className="text-xs sm:text-sm font-extrabold text-[#4E3C44] flex items-center gap-1.5 sm:gap-2">
-          <span>📦</span> <span className="hidden sm:inline">Daftar Produk Supabase</span><span className="sm:hidden">Produk</span>
-        </h2>
-        <button
-          onClick={onAdd}
-          className="px-2.5 py-1.5 sm:px-4 sm:py-2 bg-[#D9455B] text-[#FFFDFD] text-[10px] sm:text-xs font-bold rounded-lg shadow-[0_3px_0_#9C3040] hover:bg-[#C23A4E] hover:translate-y-[-1px] active:shadow-none active:translate-y-[2px] transition-all flex-shrink-0"
-        >
-          ✨ Tambah <span className="hidden sm:inline">Produk</span>
-        </button>
+      <div className="p-3 sm:p-5 border-b border-[#4E3C44]/5 bg-[#FCF8F7] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="flex items-center justify-between sm:justify-start gap-2">
+          <h2 className="text-xs sm:text-sm font-extrabold text-[#4E3C44] flex items-center gap-1.5 sm:gap-2">
+            <span>📦</span> <span className="hidden sm:inline">Daftar Produk Supabase</span><span className="sm:hidden">Produk</span>
+          </h2>
+          <button
+            onClick={onAdd}
+            className="sm:hidden px-2.5 py-1.5 bg-[#D9455B] text-[#FFFDFD] text-[10px] font-bold rounded-lg shadow-[0_3px_0_#9C3040] hover:bg-[#C23A4E] active:shadow-none active:translate-y-[2px] transition-all flex-shrink-0"
+          >
+            ✨ Tambah
+          </button>
+        </div>
+
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          {/* Search Bar */}
+          <div className="relative flex-1 sm:w-64">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-xs">
+              🔍
+            </span>
+            <input
+              type="text"
+              placeholder="Cari nama produk..."
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              className="w-full bg-white border border-[#4E3C44]/10 rounded-xl pl-8 pr-8 py-2 text-[10px] sm:text-xs font-bold text-[#4E3C44] focus:outline-none focus:border-[#D9455B] focus:ring-2 focus:ring-[#FADCDA] transition-all placeholder-[#4E3C44]/35 shadow-sm"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => onSearchChange("")}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-[#4E3C44]/40 hover:text-[#D9455B] transition-colors focus:outline-none"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
+          <button
+            onClick={onAdd}
+            className="hidden sm:inline-block px-4 py-2 bg-[#D9455B] text-[#FFFDFD] text-xs font-bold rounded-lg shadow-[0_3px_0_#9C3040] hover:bg-[#C23A4E] hover:translate-y-[-1px] active:shadow-none active:translate-y-[2px] transition-all flex-shrink-0"
+          >
+            ✨ Tambah Produk
+          </button>
+        </div>
       </div>
 
       {loading ? (

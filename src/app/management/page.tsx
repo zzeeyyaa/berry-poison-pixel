@@ -19,6 +19,7 @@ export default function ManagementPage() {
   const [paginatedCategories, setPaginatedCategories] = useState<DBCategory[]>([]);
   const [allCategories, setAllCategories] = useState<DBCategory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   // Pagination states
   const [productPage, setProductPage] = useState(1);
@@ -58,12 +59,18 @@ export default function ManagementPage() {
       const from = (productPage - 1) * PAGE_SIZE;
       const to = from + PAGE_SIZE - 1;
 
-      const { data: prodData, error: prodError, count } = await supabase
+      let query = supabase
         .from("products")
         .select(`
           id, name, price, product_link, review, featured, video_link, category_id, statboost, statboostlevel, image_url,
           categories (name, icon)
-        `, { count: "exact" })
+        `, { count: "exact" });
+
+      if (searchQuery.trim() !== "") {
+        query = query.ilike("name", `%${searchQuery.trim()}%`);
+      }
+
+      const { data: prodData, error: prodError, count } = await query
         .order("id", { ascending: false })
         .range(from, to);
 
@@ -135,7 +142,7 @@ export default function ManagementPage() {
     } else {
       fetchCategories();
     }
-  }, [activeTab, productPage, categoryPage]);
+  }, [activeTab, productPage, categoryPage, searchQuery]);
 
   const handleEditProduct = (product: DBProduct) => {
     setEditingProduct(product);
@@ -246,6 +253,11 @@ export default function ManagementPage() {
                   onAdd={() => {
                     setEditingProduct(null);
                     setIsProductModalOpen(true);
+                  }}
+                  searchQuery={searchQuery}
+                  onSearchChange={(val) => {
+                    setSearchQuery(val);
+                    setProductPage(1);
                   }}
                 />
                 
