@@ -1,5 +1,5 @@
 import React from "react";
-import { DBProduct } from "../types";
+import { DBProduct, DBCategory } from "../types";
 import { ItemIcon } from "@/src/utils/pixelArt/GenerateIconPixel";
 
 export interface ProductTableProps {
@@ -10,6 +10,9 @@ export interface ProductTableProps {
   onAdd: () => void;
   searchQuery: string;
   onSearchChange: (val: string) => void;
+  dbCategories: DBCategory[];
+  selectedCategoryFilter: number | "";
+  onCategoryFilterChange: (id: number | "") => void;
 }
 
 export default function ProductTable({
@@ -20,6 +23,9 @@ export default function ProductTable({
   onAdd,
   searchQuery,
   onSearchChange,
+  dbCategories,
+  selectedCategoryFilter,
+  onCategoryFilterChange,
 }: ProductTableProps) {
   return (
     <div className="bg-white border border-[#4E3C44]/8 rounded-2xl shadow-sm overflow-hidden mt-6 relative z-0">
@@ -36,9 +42,9 @@ export default function ProductTable({
           </button>
         </div>
 
-        <div className="flex items-center gap-2 w-full sm:w-auto">
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           {/* Search Bar */}
-          <div className="relative flex-1 sm:w-64">
+          <div className="relative flex-1 min-w-[150px] sm:w-48">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-xs">
               🔍
             </span>
@@ -58,6 +64,20 @@ export default function ProductTable({
               </button>
             )}
           </div>
+
+          {/* Category Filter Select */}
+          <select
+            value={selectedCategoryFilter}
+            onChange={(e) => onCategoryFilterChange(e.target.value === "" ? "" : Number(e.target.value))}
+            className="bg-white border border-[#4E3C44]/10 rounded-xl px-2.5 py-2 text-[10px] sm:text-xs font-bold text-[#4E3C44] focus:outline-none focus:border-[#D9455B] focus:ring-2 focus:ring-[#FADCDA] transition-all shadow-sm cursor-pointer"
+          >
+            <option value="">Semua Kategori</option>
+            {dbCategories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
 
           <button
             onClick={onAdd}

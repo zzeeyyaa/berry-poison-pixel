@@ -20,6 +20,7 @@ export default function ManagementPage() {
   const [allCategories, setAllCategories] = useState<DBCategory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<number | "">("");
 
   // Pagination states
   const [productPage, setProductPage] = useState(1);
@@ -68,6 +69,10 @@ export default function ManagementPage() {
 
       if (searchQuery.trim() !== "") {
         query = query.ilike("name", `%${searchQuery.trim()}%`);
+      }
+
+      if (selectedCategoryFilter !== "") {
+        query = query.eq("category_id", selectedCategoryFilter);
       }
 
       const { data: prodData, error: prodError, count } = await query
@@ -142,7 +147,7 @@ export default function ManagementPage() {
     } else {
       fetchCategories();
     }
-  }, [activeTab, productPage, categoryPage, searchQuery]);
+  }, [activeTab, productPage, categoryPage, searchQuery, selectedCategoryFilter]);
 
   const handleEditProduct = (product: DBProduct) => {
     setEditingProduct(product);
@@ -257,6 +262,12 @@ export default function ManagementPage() {
                   searchQuery={searchQuery}
                   onSearchChange={(val) => {
                     setSearchQuery(val);
+                    setProductPage(1);
+                  }}
+                  dbCategories={allCategories}
+                  selectedCategoryFilter={selectedCategoryFilter}
+                  onCategoryFilterChange={(id) => {
+                    setSelectedCategoryFilter(id);
                     setProductPage(1);
                   }}
                 />
